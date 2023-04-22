@@ -22,6 +22,12 @@ model.add(layers.Dense(10, activation='softmax'))
 # model.summary()
 
 dataset, key = getData()
+n = len(dataset)*7 //10
+
+X_training = dataset[0:n]
+Y_training = key[0:n]
+X_test = dataset[n:]
+Y_test = key[n:]
 
 # # Split the data into training and test sets
 # (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
