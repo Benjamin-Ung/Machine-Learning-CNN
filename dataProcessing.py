@@ -1,5 +1,6 @@
 import os, cv2
 from sklearn.utils import shuffle
+import numpy as np
 
 def getData():
     edible = []
@@ -18,7 +19,7 @@ def getData():
     # cv2.imshow("image", edible[10])
     # cv2.waitkey(0)'
 
-    print("there should be 1473 images in edible: " + len(edible))
+    print("there should be 1473 images in edible: " + str( len(edible) ) )
 
     #Reading in data from poisonous dataset
     path = 'dataset/Poisonous/'
@@ -28,12 +29,15 @@ def getData():
         sample = cv2.imread(path + image)
         poisonous.append(sample)
 
-    print("there should be 527 images in poisonous: " + len(poisonous))
+    print("there should be 527 images in poisonous: " + str( len(poisonous) ) )
 
-    key.append(1*len(edible))
-    key.append(0*len(poisonous))
+    key = [1]*len(edible)
+    key.extend([0]*len(poisonous))
 
-    dataset = edible.append(poisonous)
-    shuffle(dataset, key)
+    edible.extend(poisonous)
+    dataset, key = shuffle(edible, key)
+    print(sample.shape)
 
     return dataset, key
+
+# getData()
